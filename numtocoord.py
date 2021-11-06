@@ -1,4 +1,5 @@
 import numpy as np
+from decimal import Decimal
 
 def nuzzles_you(nums, d):
     nd_coords = []
@@ -17,7 +18,23 @@ def nuzzles_you(nums, d):
             nd_coord[k] = ''.join(nd_coord[k])
         nd_coords.append(nd_coord)
 
-    return nd_coords
+    return nd_coords, maxnum_len
 
-# coords = nuzzles_you(list(range(0, 11)), 3)
-# print(coords[-10:])
+def nuzzles_you_float(nums, cap):
+    n_dec = 0
+    for i, num in enumerate(nums):
+        if int(num) == num:
+            continue
+        n_dec_i = len(str(Decimal(num)).split(".")[-1])
+        if n_dec_i <= cap:
+            n_dec = n_dec if n_dec >= n_dec_i else n_dec_i
+        else:
+            n_dec = cap
+            break
+
+    for j in range(len(nums)):
+        nums[j] = int(nums[j] * (10**n_dec))
+    return nums
+
+coords = nuzzles_you(list(range(0, 11)), 3)
+print(coords[-10:])
