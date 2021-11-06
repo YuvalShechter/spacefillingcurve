@@ -1,0 +1,1 @@
+C:\Users\zeroc\Desktop\spacefillingcurve\sfc\Scripts\Activate.ps1
