@@ -1,19 +1,6 @@
 import numpy as np
 from decimal import Decimal
 
-def rawr(str1, str2, acc, index1=0, index2=0):
-  if ((index1 + index2) == len(str1 + str2)):
-    return acc
-  return rawr(str2, str1, acc + str1[index1], index2, index1+1)
-
-def interleave(strings):
-  acc = ''
-  str_len = len(strings[0])
-  for i in range(str_len):
-    for j in range(len(strings)):
-      acc = acc + strings[j][i] 
-  return acc
-
 def nuzzles_you_float(nums, cap):
   n_dec = 0
   for j in range(len(nums)):
@@ -60,15 +47,31 @@ def pad_binary(data):
         data[arr][i] = zeroString + data[arr][i]
   return data
 
+#Interleave an n-dimension vector of binary strings
+def interleave(strings):
+  acc = ''
+  str_len = len(strings[0])
+  for i in range(str_len):
+    for j in range(len(strings)):
+      acc = acc + strings[j][i] 
+  return acc
+
 def interleave_data(data):
   interleaved_data = []
   for arr in range(len(data)):
     interleaved_data.append(interleave(data[arr]))
   return interleaved_data
 
+def convert_to_decimal(data):
+  decimal_data = []
+  dec_max = int(''.join(['1']*len(data[0])), 2)
+  for i in range(len(data)):
+    decimal_data.append(int(data[i], 2))
+  #return normalized form of decimal_data (between 0 and 1)
+  return [dec/dec_max for dec in decimal_data], dec_max
+
 def coord_to_num(data, cap):
   binary_data = convert_to_binary(data, cap)
   padded_data = pad_binary(binary_data)
-  return interleave_data(padded_data)
-
-#print(coord_to_num([[1.12,2,3], [4,5,6], [7,8,9]], 5))
+  interleaved_data = interleave_data(padded_data)
+  return convert_to_decimal(interleaved_data)
