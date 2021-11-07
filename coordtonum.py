@@ -2,8 +2,8 @@ import numpy as np
 from decimal import Decimal
 
 #Take in initial representaiton of data (potentially as floats) and scale them based off largest floating point into integers
-#nuzzles_you_float(nums: float[][], cap: integer): integer[][]
-def nuzzles_you_float(nums, cap):
+#scale_float(nums: float[][], cap: integer): integer[][]
+def scale_float(nums, cap):
   n_dec = 0
   for j in range(len(nums)):
     for i, num in enumerate(nums[j]):
@@ -26,7 +26,7 @@ def nuzzles_you_float(nums, cap):
 #convert_to_binary(data: float[][], cap: integer): string[][]
 def convert_to_binary(data, cap):
   binary_data = []
-  integer_data = nuzzles_you_float(data, cap)
+  integer_data = scale_float(data, cap)
   for arr in range(len(integer_data)):
     elements = []
     for i in range(len(integer_data[arr])):
