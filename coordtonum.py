@@ -1,6 +1,8 @@
 import numpy as np
 from decimal import Decimal
 
+#Take in initial representaiton of data (potentially as floats) and scale them based off largest floating point into integers
+#nuzzles_you_float(nums: float[][], cap: integer): integer[][]
 def nuzzles_you_float(nums, cap):
   n_dec = 0
   for j in range(len(nums)):
@@ -21,6 +23,7 @@ def nuzzles_you_float(nums, cap):
       nums[j][i] = int(nums[j][i] * (10**n_dec))
   return nums
 
+#convert_to_binary(data: float[][], cap: integer): string[][]
 def convert_to_binary(data, cap):
   binary_data = []
   integer_data = nuzzles_you_float(data, cap)
@@ -31,6 +34,7 @@ def convert_to_binary(data, cap):
     binary_data.append(elements)
   return binary_data
 
+#pad_binary(data: string[][]): string[][]
 def pad_binary(data):
   #Holds length of largest string in data
   max_len = len(data[0][0])
@@ -48,6 +52,7 @@ def pad_binary(data):
   return data
 
 #Interleave an n-dimension vector of binary strings
+#interleave(strings: string[]): string 
 def interleave(strings):
   acc = ''
   str_len = len(strings[0])
@@ -56,12 +61,14 @@ def interleave(strings):
       acc = acc + strings[j][i] 
   return acc
 
+#interleave_data(data: string[][]): string[]
 def interleave_data(data):
   interleaved_data = []
   for arr in range(len(data)):
     interleaved_data.append(interleave(data[arr]))
   return interleaved_data
 
+#convert_to_decimal(data: string[]): float[]
 def convert_to_decimal(data):
   decimal_data = []
   dec_max = int(''.join(['1']*len(data[0])), 2)
@@ -70,6 +77,8 @@ def convert_to_decimal(data):
   #return normalized form of decimal_data (between 0 and 1)
   return [dec/dec_max for dec in decimal_data], dec_max
 
+#Converts data to z-curve representation of data (one-dimension)
+#coord_to_num(data: float[][], cap: integer): float[]
 def coord_to_num(data, cap):
   binary_data = convert_to_binary(data, cap)
   padded_data = pad_binary(binary_data)
