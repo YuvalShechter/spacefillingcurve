@@ -1,7 +1,8 @@
-import enum
+from sklearn import datasets
+from coordtonum import coord_to_num
 import numpy as np
 from decimal import Decimal
-from graph3d import todf3D, plot3D, todf2D, plot2D
+from graph3d import plot1D, todf3D, plot3D, todf2D, plot2D
 
 def nuzzles_you(nums, d):
     nd_coords = []
@@ -46,10 +47,25 @@ def convert_to_uwu(coords):
             coord[j] = np.dot(int_vec, halves)
     return coords
 
-coords, max_pad = nuzzles_you(list(range(0, 512)), 3)
-coords = np.array(convert_to_uwu(coords))
-plot3D(todf3D(coords[:, 0], coords[:, 1], coords[:, 2], range(len(coords))))
+# iris = datasets.load_iris()
+# X = iris.data[:, :2].tolist()  # we only take the first two features.
+# y = iris.target
 
-# coords, max_pad = nuzzles_you(list(range(0, 256)), 2)
+random_state = 170
+X, y = datasets.make_blobs(n_samples=15000, random_state=random_state)
+X = abs(X)
+X = X.tolist()
+plot1D(X, y)
+
+# coords, max_pad = nuzzles_you(list(range(0, 2**13)), 3)
+# coords = np.array(convert_to_uwu(coords))
+# plot3D(todf3D(coords[:, 0], coords[:, 1], coords[:, 2], range(len(coords))))
+
+# coords, max_pad = nuzzles_you(list(range(0, 2**13)), 2)
+# coords = np.array(convert_to_uwu(coords))
+# X, _ = coord_to_num(coords.tolist(), 10)
+# plot1D(X, list(range(0, len(X))))
+
+# coords, max_pad = nuzzles_you(list(range(0, 1024)), 2)
 # coords = np.array(convert_to_uwu(coords))
 # plot2D(todf2D(coords[:, 0], coords[:, 1], range(len(coords))), line=True)

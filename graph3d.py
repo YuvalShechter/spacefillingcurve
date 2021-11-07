@@ -2,11 +2,11 @@ import pandas as pd
 import plotly.graph_objects as go
 import plotly.express as px
 
-def plot1D(df):
+def plot1D(x, color):
     fig = px.scatter(
-        x=df["x"],
-        y=[1 for _ in len(df["x"])],
-        color=df["color"],
+        x=x,
+        y=[1 for _ in range(len(x))],
+        color=color,
         title="Plot in 1D",
         labels = {"0": "Type 0"}
     )

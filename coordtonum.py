@@ -61,7 +61,7 @@ def interleave(strings):
       acc = acc + strings[j][i] 
   return acc
 
-#interleave_data(data: string[][]): string[]
+#interleave_data(data: string[][][]...[]): string[]
 def interleave_data(data):
   interleaved_data = []
   for arr in range(len(data)):
@@ -78,7 +78,7 @@ def convert_to_decimal(data):
   return [dec/dec_max for dec in decimal_data], dec_max
 
 #Converts data to z-curve representation of data (one-dimension)
-#coord_to_num(data: float[][], cap: integer): float[]
+#coord_to_num(data: float[][][]...[], cap: integer): float[]
 def coord_to_num(data, cap):
   binary_data = convert_to_binary(data, cap)
   padded_data = pad_binary(binary_data)
