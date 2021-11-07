@@ -1,5 +1,7 @@
+import enum
 import numpy as np
 from decimal import Decimal
+from graph3d import todf3D, plot3D, todf2D, plot2D
 
 def nuzzles_you(nums, d):
     nd_coords = []
@@ -25,7 +27,7 @@ def nuzzles_you_float(nums, cap):
     for i, num in enumerate(nums):
         if int(num) == num:
             continue
-        n_dec_i = len(str(Decimal(num)).split(".")[-1])
+        n_dec_i = len(str(num).split(".")[-1])
         if n_dec_i <= cap:
             n_dec = n_dec if n_dec >= n_dec_i else n_dec_i
         else:
@@ -36,5 +38,18 @@ def nuzzles_you_float(nums, cap):
         nums[j] = int(nums[j] * (10**n_dec))
     return nums
 
-coords = nuzzles_you(list(range(0, 11)), 3)
-print(coords[-10:])
+def convert_to_uwu(coords):
+    for i, coord in enumerate(coords):
+        for j, loc in enumerate(coord):
+            halves = [2**(-k) for k in range(1, len(loc)+1)]
+            int_vec = [int(loc_i) for loc_i in loc]
+            coord[j] = np.dot(int_vec, halves)
+    return coords
+
+coords, max_pad = nuzzles_you(list(range(0, 512)), 3)
+coords = np.array(convert_to_uwu(coords))
+plot3D(todf3D(coords[:, 0], coords[:, 1], coords[:, 2], range(len(coords))))
+
+# coords, max_pad = nuzzles_you(list(range(0, 256)), 2)
+# coords = np.array(convert_to_uwu(coords))
+# plot2D(todf2D(coords[:, 0], coords[:, 1], range(len(coords))), line=True)
