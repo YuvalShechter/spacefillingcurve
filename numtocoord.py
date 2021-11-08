@@ -48,24 +48,41 @@ def convert_to_halves(coords):
     return coords
 
 # iris = datasets.load_iris()
-# X = iris.data[:, :2].tolist()  # we only take the first two features.
+# X = iris.data[:, :2]  # we only take the first two features.
 # y = iris.target
+# plot2D(todf2D(X[:, 0], X[:, 1], y))
 
 X, y = datasets.make_blobs(n_samples=1500, random_state=170)
+# plot2D(todf2D(X[:, 0], X[:, 1], y))
 X = abs(X)
 X = X.tolist()
 X, _ = coord_to_num(X, 10)
-plot1D(X, y)
+# plot1D(X, y)
+coords, max_pad = numtocoord(scale_float_n2c(X, 10), 3)
+coords = np.array(convert_to_halves(coords))
+plot3D(todf3D(coords[:, 0], coords[:, 1], coords[:, 2], list(range(len(coords)))))
 
-# coords, max_pad = numtocoord(list(range(0, 2**13)), 3)
+# coords, max_pad = numtocoord(list(range(0, 2**9)), 3)
 # coords = np.array(convert_to_halves(coords))
 # plot3D(todf3D(coords[:, 0], coords[:, 1], coords[:, 2], range(len(coords))))
 
-# coords, max_pad = numtocoord(list(range(0, 2**13)), 2)
+# coords, max_pad = numtocoord(list(range(0, 2**9)), 2)
 # coords = np.array(convert_to_halves(coords))
+# plot2D(todf2D(coords[:, 0], coords[:, 1], range(len(coords))))
+
+# coords, max_pad = numtocoord(list(range(0, 2**9)), 2)
+# coords = np.array(convert_to_halves(coords))
+# plot2D(todf2D(coords[:, 1], coords[:, 0], range(len(coords))))
 # X, _ = coord_to_num(coords.tolist(), 10)
 # plot1D(X, list(range(0, len(X))))
 
-# coords, max_pad = numtocoord(list(range(0, 1024)), 2)
+# [0,1,2 ... 1024]
+# coords, max_pad = numtocoord(list(range(0, 2**2)), 2)
 # coords = np.array(convert_to_halves(coords))
-# plot2D(todf2D(coords[:, 0], coords[:, 1], range(len(coords))), line=True)
+# plot2D(todf2D(coords[:, 1], coords[:, 0], range(len(coords))), line=True)
+# coords, max_pad = numtocoord(list(range(0, 2**8)), 2)
+# coords = np.array(convert_to_halves(coords))
+# plot2D(todf2D(coords[:, 1], coords[:, 0], range(len(coords))), line=True)
+# coords, max_pad = numtocoord(list(range(0, 2**12)), 2)
+# coords = np.array(convert_to_halves(coords))
+# plot2D(todf2D(coords[:, 1], coords[:, 0], range(len(coords))), line=True)
